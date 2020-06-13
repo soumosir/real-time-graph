@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        
+    </script>
+</head>
+    <body onload = "myFunction()">
+        <div style="max-width: 900px; max-height: 400px;">
+            <div id="myChart" width="900" height="400"></div>
+        </div>
+    </body>
+    
+    <script>
+        function myFunction(){
+        let socket = new WebSocket('ws://localhost:8000/ws/polData/');
+        socket.onopen = function(e){
+            alert('connection established');
+        };
+        socket.onmessage = function(e){
+            console.log(e.data);
+            document.getElementById('myChart').innerHTML=e.data;
+
+        };
+        socket.onclose = function(e){
+            alert('Connection closed');
+        }
+        }
+    </script>
+</html>
